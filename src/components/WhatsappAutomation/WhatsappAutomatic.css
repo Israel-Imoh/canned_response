@@ -1,0 +1,39 @@
+.whatsapp-automation{
+    background-color:rgba(0, 0, 0, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.whatsapp-automation-container {
+    margin-bottom: 20px;
+    width: 97vw;
+    height: auto;
+    background: 
+        url('../../assets/automation_img.png'),
+        linear-gradient(
+            rgba(143, 5, 143, 0.5), 
+            #430C8A 
+        );
+    color: white;
+    text-align: center; 
+    padding-top: 55px;
+    border-radius: 22px;
+}
+
+.whatsapp-automation-container p{
+    color: #FFFFFF99;
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.whatsapp-automation-container h1{
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 40px;
+}
+.whatsapp-automation-container img{
+    width: 527px;
+    height: auto;
+}
