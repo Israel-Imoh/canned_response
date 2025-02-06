@@ -5,6 +5,7 @@ import { BiFilterAlt } from "react-icons/bi";
 import Edit_icon from "../../assets/edit_icon.png";
 import Copy_icon from "../../assets/copy_icon.png";
 import toast from "react-hot-toast";
+import { search_dropdown, filter_dropdown } from "../../data/Data";
 
 const Hero = () => {
   const [dropdown, setDropdown] = useState(false);
@@ -12,14 +13,16 @@ const Hero = () => {
   const searchRef = useRef(null);
   const filterRef = useRef(null);
   const dropdownRef = useRef(null);
-  const [searchData, setSearchData] = useState([]);
+  const [searchData, setSearchData] = useState(search_dropdown);
   const [search, setSearch] = useState("");
 
   // Close dropdown when clicking outside
   const handleClickOutside = (e) => {
     if (
-      searchRef.current && !searchRef.current.contains(e.target) &&
-      filterRef.current && !filterRef.current.contains(e.target)
+      searchRef.current &&
+      !searchRef.current.contains(e.target) &&
+      filterRef.current &&
+      !filterRef.current.contains(e.target)
     ) {
       setDropdown(false);
       setSearchDropdown(false);
@@ -31,21 +34,6 @@ const Hero = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const fetchSearchData = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/search-dropdown");
-      const data = await response.json();
-      setSearchData(data);
-    } catch (error) {
-      console.error(error.message);
-      toast.error("FAILED TO FETCH");
-    }
-  };
-
-  useEffect(() => {
-    fetchSearchData();
-  }, []);
-
   // Prevent scroll lock by allowing natural page scrolling when reaching top or bottom
   const handleDropdownScroll = (e) => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
@@ -55,6 +43,15 @@ const Hero = () => {
       e.target.scrollTop -= 1;
     }
   };
+
+  // Group filter items by category
+  const groupedFilters = filter_dropdown.reduce((acc, item) => {
+    if (!acc[item.filter_header]) {
+      acc[item.filter_header] = [];
+    }
+    acc[item.filter_header].push(item);
+    return acc;
+  }, {});
 
   return (
     <div className="hero">
@@ -72,12 +69,17 @@ const Hero = () => {
         <div className="input-fields">
           {/* Search Bar */}
           <div className="searchbar-container" ref={searchRef}>
-            <div
-              className="searchbar"
-              onClick={() => setSearchDropdown(true)}
-            >
+            <div className="searchbar" onClick={() => setSearchDropdown(true)}>
               <span>
-                <CiSearch size={20} style={{ color: "#6B7280", position: "relative", left: "25px", top: "1px" }} />
+                <CiSearch
+                  size={20}
+                  style={{
+                    color: "#6B7280",
+                    position: "relative",
+                    left: "25px",
+                    top: "1px",
+                  }}
+                />
               </span>
               <input
                 onChange={(e) => setSearch(e.target.value)}
@@ -87,14 +89,24 @@ const Hero = () => {
             </div>
 
             {searchDropdown && (
-              <div className="search-dropdown-container" ref={dropdownRef} onWheel={handleDropdownScroll}>
+              <div
+                className="search-dropdown-container"
+                ref={dropdownRef}
+                onWheel={handleDropdownScroll}
+              >
                 {searchData
                   .filter((item) =>
                     search.trim() === ""
                       ? true
-                      : (item.text_1?.toLowerCase().includes(search.toLowerCase()) ||
-                        item.text_2?.toLowerCase().includes(search.toLowerCase()) ||
-                        item.status?.toLowerCase().includes(search.toLowerCase()))
+                      : item.text_1
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        item.text_2
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase()) ||
+                        item.status
+                          ?.toLowerCase()
+                          .includes(search.toLowerCase())
                   )
                   .map((item, i) => (
                     <div className="search-dropdown" key={i}>
@@ -120,7 +132,7 @@ const Hero = () => {
           <div className="filter-container" ref={filterRef}>
             <div className="filter-bar" onClick={() => setDropdown(!dropdown)}>
               <BiFilterAlt size={15} style={{ color: "#FFFFFF" }} />
-              <p style={{ fontSize: "15px", fontWeight: "400"}}>Filter</p>
+              <p style={{ fontSize: "15px", fontWeight: "400" }}>Filter</p>
             </div>
 
             {dropdown && (
@@ -129,58 +141,48 @@ const Hero = () => {
                   <div className="scroll">
                     <div className="filter-searchbar">
                       <span>
-                        <CiSearch size={20} style={{ color: "#6B7280", position: "relative", left: "25px", top: "1px" }} />
+                        <CiSearch
+                          size={20}
+                          style={{
+                            color: "#6B7280",
+                            position: "relative",
+                            left: "25px",
+                            top: "1px",
+                          }}
+                        />
                       </span>
-                      <input type="text" placeholder="Search for" />
+                      <input
+                        onChange={(e) => setSearch(e.target.value)}
+                        type="text"
+                        placeholder="Search for"
+                      />
                     </div>
                     <div className="filter-items">
-                      <div className="items">
-                        <h5 style={{ marginTop: "10px" }}>GREETING</h5>
-                        <div className="item-info">
-                          <p className="text">First-time visitor</p>
-                          <p className="n0">7</p>
-                        </div>
-                        <div className="item-info">
-                          <p className="text">Returning visitor</p>
-                          <p className="n0">6</p>
-                        </div>
-                        <hr />
-                      </div>
-                      <div className="items">
-                        <h5>PUT ON HOLD</h5>
-                        <div className="item-info">
-                          <p className="text">In the queue</p>
-                          <p className="n0">7</p>
-                        </div>
-                        <div className="item-info">
-                          <p className="text">Mid-session</p>
-                          <p className="n0">10</p>
-                        </div>
-                        <hr />
-                      </div>
-                      <div className="items">
-                        <h5>PERMISSIONS</h5>
-                        <div className="item-info">
-                          <p className="text">Recording disclaimer</p>
-                          <p className="n0">5</p>
-                        </div>
-                        <div className="item-info">
-                          <p className="text">Ask for more information</p>
-                          <p className="n0">12</p>
-                        </div>
-                        <div className="item-info">
-                          <p className="text">Transferring the chat</p>
-                          <p className="n0">11</p>
-                        </div>
-                        <div className="item-info">
-                          <p className="text">Don't know</p>
-                          <p className="n0">9</p>
-                        </div>
-                        <div className="item-info">
-                          <p className="text">Admin fault</p>
-                          <p className="n0">8</p>
-                        </div>
-                      </div>
+                      {Object.entries(groupedFilters)
+                        .map(([header, items], index) => {
+                          const filteredItems = items.filter((item) =>
+                            search.trim() === ""
+                              ? true
+                              : item.filter_text
+                                  ?.toLowerCase()
+                                  .includes(search.toLowerCase())
+                          );
+
+                          if (filteredItems.length === 0) return null; // Hide empty groups
+
+                          return (
+                            <div className="items" key={index}>
+                              <h5 style={{ marginTop: "10px" }}>{header}</h5>
+                              {filteredItems.map((item, i) => (
+                                <div className="item-info" key={i}>
+                                  <p className="text">{item.filter_text}</p>
+                                  <p className="n0">{item.filter_no}</p>
+                                </div>
+                              ))}
+                              <hr />
+                            </div>
+                          );
+                        })}
                     </div>
                   </div>
                 </div>

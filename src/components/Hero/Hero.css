@@ -73,8 +73,8 @@
   align-items: center;
   justify-content: center;
   margin-top: 50px;
-  position: relative;
-  left: 530px;
+  /* position: relative;
+  left: 530px; */
   
 }
 
@@ -83,6 +83,9 @@
   font-weight: 600;
   height: 16px;
   color: #eaedf5;
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 .top-header h1 {
