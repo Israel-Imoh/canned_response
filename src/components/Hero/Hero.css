@@ -282,7 +282,7 @@
   top: calc(100% + 5px);
   left: 0;
   padding: 15px;
-  background: rgba(23, 24, 25, 0.8);
+  background: rgba(23, 24, 25, 1);
   height: auto;
   width: 289px;
   border-radius: 6px;
