@@ -83,34 +83,34 @@
         {
             "category": "PERMISSIONS",
             "text_1": "Welcome to [company name]'s chat. This chat may/would be recorded for the internal training process.",
-            "text_2": "Recoring Disclaimer",
+            "text_2": "Recording Disclaimer",
             "id": 13,
             "status": "recording-disclaimer"
         },
         {
             "category": "PERMISSIONS",
             "text_1": "Thank you for contacting [company name]. I am [your name] and I would like to tell you that this chat may/would be recorded for the internal training process.",
-            "text_2": "Recoring Disclaimer",
+            "text_2": "Recording Disclaimer",
             "id": 14,
             "status": "recording-disclaimer"
         },
         {
             "category": "PERMISSIONS",
             "text_1": "Hi there! Thanks for stopping by. Please know that our chat may be recorded for internal training purposes.",
-            "text_2": "Recoring Disclaimer",
+            "text_2": "Recording Disclaimer",
             "id": 15,
             "status": "recording-disclaimer"
         },
         {
             "category": "PERMISSIONS",
             "text_1": "Hi [customer name]. Thanks for visiting. I want to let you know that this chat will be reviewed for quality assurance purposes and, if necessary, followed up.",
-            "text_2": "Recoring Disclaimer",
+            "text_2": "Recording Disclaimer",
             "id": 16,
             "status": "recording-disclaimer"
         },
         {
             "text_1": "Hi [customer name], welcome. Please be aware that this chat will be reviewed for quality assurance purposes.",
-            "text_2": "Recoring Disclaimer",
+            "text_2": "Recording Disclaimer",
             "id": 17,
             "status": "recording-disclaimer"
         },
@@ -446,58 +446,58 @@
         {
             "category": "PERMISSIONS",
             "text_1": "I am sorry about your [customer's issue]. Could you please give me a few moments to speak with my manager and see how we can fix this for you?",
-            "text_2": "Admit fault",
+            "text_2": "Admin fault",
             "id": 63,
-            "status": "admit-fault"
+            "status": "admin-fault"
         },
         {
             "category": "PERMISSIONS",
             "text_1": "We apologize for any inconvenience [customer's issue] has caused you. Let me share a fix about that ASAP.",
-            "text_2": "Admit fault",
+            "text_2": "Admin fault",
             "id": 64,
-            "status": "admit-fault"
+            "status": "admin-fault"
         },
         {
             "category": "PERMISSIONS",
             "text_1": "I'm sorry you're having trouble with that. Let me see if I can help in any way.",
-            "text_2": "Admit fault",
+            "text_2": "Admin fault",
             "id": 65,
-            "status": "admit-fault"
+            "status": "admin-fault"
         },
         {
             "category": "PERMISSIONS",
             "text_1": "I'm sorry to hear about your problem. I'll share a solution with you in a few minutes.",
-            "text_2": "Admit fault",
+            "text_2": "Admin fault",
             "id": 66,
-            "status": "admit-fault"
+            "status": "admin-fault"
         },
         {
             "category": "PERMISSIONS",
             "text_1": "I get how you're feeling, and I'm sorry to hear about your bad experience. Let me help you with this right away.",
-            "text_2": "Admit fault",
+            "text_2": "Admin fault",
             "id": 67,
-            "status": "admit-fault"
+            "status": "admin-fault"
         },
         {
             "category": "PERMISSIONS",
             "text_1": "I understand how frustrating this must be for you. Let me take care of this right away.",
-            "text_2": "Admit fault",
+            "text_2": "Admin fault",
             "id": 68,
-            "status": "admit-fault"
+            "status": "admin-fault"
         },
         {
             "category": "PERMISSIONS",
             "text_1": "I'm sorry about your poor experience with your purchase. What can we do to make things right?",
-            "text_2": "Admit fault",
+            "text_2": "Admin fault",
             "id": 69,
-            "status": "admit-fault"
+            "status": "admin-fault"
         },
         {
             "category": "PERMISSIONS",
             "text_1": "I am sorry about the experience you had. We want to provide the best services to our customers. Can I offer [offering] to compensate for your time?",
-            "text_2": "Admit fault",
+            "text_2": "Admin fault",
             "id": 70,
-            "status": "admit-fault"
+            "status": "admin-fault"
         },
         {
             "text_1": "I'm sorry, but we don't support that right now. Let me see what else I can do for you.",
@@ -529,7 +529,7 @@
             "filter_no": 7
         },
         {
-            
+            "filter_header": "GREETINGS",
             "filter_text": "Returning visitor",
             "filter_no": 6
         },
@@ -539,28 +539,32 @@
             "filter_no": 10
         },
         {
-            
+            "filter_header": "PUT ON HOLD",
             "filter_text": "Mid-session",
             "filter_no": 10
         },
         {
             "filter_header": "PERMISSIONS",
-            "filter_text": "Recording disclaimere",
+            "filter_text": "Recording disclaimer",
             "filter_no": 5
         },
         {
+            "filter_header": "PERMISSIONS",
             "filter_text": "Ask for more information",
             "filter_no": 12
         },
         {
+            "filter_header": "PERMISSIONS",
             "filter_text": "Transferring the chat",
             "filter_no": 11
         },
         {
+            "filter_header": "PERMISSIONS",
             "filter_text": "Don't know",
             "filter_no": 9
         },
         {
+            "filter_header": "PERMISSIONS",
             "filter_text": "Admin fault",
             "filter_no": 8
         }

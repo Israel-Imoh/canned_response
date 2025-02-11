@@ -2,49 +2,18 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Hero.css";
 import { CiSearch } from "react-icons/ci";
 import { BiFilterAlt } from "react-icons/bi";
-import Edit_icon from "../../assets/edit_icon.png";
+import { AiOutlineCheck } from "react-icons/ai";
 import Copy_icon from "../../assets/copy_icon.png";
-import toast from "react-hot-toast";
 import { search_dropdown, filter_dropdown } from "../../data/Data";
 
 const Hero = () => {
-  const [dropdown, setDropdown] = useState(false);
-  const [searchDropdown, setSearchDropdown] = useState(false);
-  const searchRef = useRef(null);
-  const filterRef = useRef(null);
-  const dropdownRef = useRef(null);
-  const [searchData, setSearchData] = useState(search_dropdown);
   const [search, setSearch] = useState("");
+  const [filterSearch, setFilterSearch] = useState("");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [copiedText, setCopiedText] = useState(null);
+  const filterRef = useRef(null);
 
-  // Close dropdown when clicking outside
-  const handleClickOutside = (e) => {
-    if (
-      searchRef.current &&
-      !searchRef.current.contains(e.target) &&
-      filterRef.current &&
-      !filterRef.current.contains(e.target)
-    ) {
-      setDropdown(false);
-      setSearchDropdown(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  // Prevent scroll lock by allowing natural page scrolling when reaching top or bottom
-  const handleDropdownScroll = (e) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.target;
-    if (scrollTop === 0) {
-      e.target.scrollTop = 1;
-    } else if (scrollTop + clientHeight === scrollHeight) {
-      e.target.scrollTop -= 1;
-    }
-  };
-
-  // Group filter items by category
   const groupedFilters = filter_dropdown.reduce((acc, item) => {
     if (!acc[item.filter_header]) {
       acc[item.filter_header] = [];
@@ -52,6 +21,45 @@ const Hero = () => {
     acc[item.filter_header].push(item);
     return acc;
   }, {});
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleFilterSelect = (filterText) => {
+    setSelectedFilter(filterText);
+  };
+
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    setCopiedText(text);
+    setTimeout(() => setCopiedText(null), 2000);
+  };
+
+  const filteredSearchResults = search_dropdown.filter((item) => {
+    const matchesSearch = search.trim() === ""
+      ? true
+      : [item.text_1, item.text_2, item.status].some(
+          text => text?.toLowerCase().includes(search.toLowerCase())
+        );
+
+    const matchesFilter = selectedFilter 
+      ? [item.text_1, item.text_2, item.status].some(
+          text => text?.toLowerCase().includes(selectedFilter.toLowerCase())
+        )
+      : true;
+
+    return matchesSearch && matchesFilter;
+  });
 
   return (
     <div className="hero">
@@ -62,136 +70,96 @@ const Hero = () => {
             <h5>Ruut Canned Responses Library</h5>
           </div>
           <h1>
-            Tailored Canned Response <br /> that’s highly customizable.
+            Tailored Canned Response <br /> that's highly customizable.
           </h1>
         </div>
 
-        <div className="input-fields">
-          {/* Search Bar */}
-          <div className="searchbar-container" ref={searchRef}>
-            <div className="searchbar" onClick={() => setSearchDropdown(true)}>
-              <span>
-                <CiSearch
-                  size={20}
-                  style={{
-                    color: "#6B7280",
-                    position: "relative",
-                    left: "25px",
-                    top: "1px",
-                  }}
+        <div className="input-fields-wrapper">
+          <div className="input-fields">
+            <div className="searchbar-container">
+              <div className="searchbar">
+                <CiSearch style={{marginBottom: "16px"}} size={20} className="search-icon" />
+                <input
+                  onChange={(e) => setSearch(e.target.value)}
+                  value={search}
+                  type="text"
+                  placeholder='Search for "How can I help?"'
                 />
-              </span>
-              <input
-                onChange={(e) => setSearch(e.target.value)}
-                type="text"
-                placeholder='Search for "How can I help?"'
-              />
+              </div>
             </div>
 
-            {searchDropdown && (
-              <div
-                className="search-dropdown-container"
-                ref={dropdownRef}
-                onWheel={handleDropdownScroll}
+            <div className="filter-container" ref={filterRef}>
+              <div 
+                className="filter-bar"
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
               >
-                {searchData
-                  .filter((item) =>
-                    search.trim() === ""
-                      ? true
-                      : item.text_1
-                          ?.toLowerCase()
-                          .includes(search.toLowerCase()) ||
-                        item.text_2
-                          ?.toLowerCase()
-                          .includes(search.toLowerCase()) ||
-                        item.status
-                          ?.toLowerCase()
-                          .includes(search.toLowerCase())
-                  )
-                  .map((item, i) => (
-                    <div className="search-dropdown" key={i}>
-                      <div className="search-items">
-                        <p className="user-text">{item.text_1}</p>
-                      </div>
-                      <div className="search-subitems">
-                        <p className={`search-subitems-text ${item.status}`}>
-                          {item.text_2}
-                        </p>
-                        <div className="icons">
-                          <img src={Edit_icon} alt="Edit" />
-                          <img src={Copy_icon} alt="Copy" />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                <BiFilterAlt size={15} />
+                <p>Filter</p>
               </div>
-            )}
+
+              {isFilterOpen && (
+                <div className="filter-dropdown-container">
+                  <div className="filter-searchbar">
+                    <CiSearch size={20} style={{marginTop: "2px", marginLeft: "12px"}} className="search-icon" />
+                    <input
+                      onChange={(e) => setFilterSearch(e.target.value)}
+                      value={filterSearch}
+                      type="text"
+                      placeholder="Search for"
+                    />
+                  </div>
+                  <div className="filter-items">
+                    {Object.entries(groupedFilters).map(([header, items], index) => {
+                      const filteredItems = items.filter((item) =>
+                        filterSearch.trim() === ""
+                          ? true
+                          : item.filter_text.toLowerCase().includes(filterSearch.toLowerCase())
+                      );
+                      if (filteredItems.length === 0) return null;
+                      return (
+                        <div className="items" key={index}>
+                          <h5>{header}</h5>
+                          {filteredItems.map((item, i) => (
+                            <div 
+                              className={`item-info ${selectedFilter === item.filter_text ? 'selected' : ''}`}
+                              key={i}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleFilterSelect(item.filter_text);
+                              }}
+                              style={{ cursor: 'pointer' }}
+                            >
+                              <p className="text">{item.filter_text}</p>
+                              <p className="n0">{item.filter_no}</p>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Filter Dropdown */}
-          <div className="filter-container" ref={filterRef}>
-            <div className="filter-bar" onClick={() => setDropdown(!dropdown)}>
-              <BiFilterAlt size={15} style={{ color: "#FFFFFF" }} />
-              <p style={{ fontSize: "15px", fontWeight: "400" }}>Filter</p>
-            </div>
-
-            {dropdown && (
-              <div className="filter-dropdown-container">
-                <div className="filter-dropdown">
-                  <div className="scroll">
-                    <div className="filter-searchbar">
-                      <span>
-                        <CiSearch
-                          size={20}
-                          style={{
-                            color: "#6B7280",
-                            position: "relative",
-                            left: "25px",
-                            top: "1px",
-                          }}
-                        />
-                      </span>
-                      <input
-                        onChange={(e) => setSearch(e.target.value)}
-                        type="text"
-                        placeholder="Search for"
-                      />
-                    </div>
-                    <div className="filter-items">
-                      {Object.entries(groupedFilters)
-                        .map(([header, items], index) => {
-                          const filteredItems = items.filter((item) =>
-                            search.trim() === ""
-                              ? true
-                              : item.filter_text
-                                  ?.toLowerCase()
-                                  .includes(search.toLowerCase())
-                          );
-
-                          if (filteredItems.length === 0) return null; // Hide empty groups
-
-                          return (
-                            <div className="items" key={index}>
-                              <h5 style={{ marginTop: "10px" }}>{header}</h5>
-                              {filteredItems.map((item, i) => (
-                                <div className="item-info" key={i}>
-                                  <p className="text">{item.filter_text}</p>
-                                  <p className="n0">{item.filter_no}</p>
-                                </div>
-                              ))}
-                              <hr />
-                            </div>
-                          );
-                        })}
+          <div className="dropdowns-container">
+            <div className="search-dropdown-container">
+              {filteredSearchResults.map((item, i) => (
+                <div className="search-dropdown" key={i}>
+                  <div className="search-items">
+                    <p className="user-text">{item.text_1}</p>
+                  </div>
+                  <div className="search-subitems">
+                    <p className={`search-subitems-text ${item.status}`}>{item.text_2}</p>
+                    <div className="icons" onClick={() => handleCopy(item.text_1)}>
+                      {copiedText === item.text_1 ? <AiOutlineCheck size={20} color="gray" /> : <img src={Copy_icon} alt="Copy" style={{ cursor: "pointer" }} />}
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              ))}
+            </div>
           </div>
         </div>
-
-        <div className="lorem"></div>
       </div>
     </div>
   );
