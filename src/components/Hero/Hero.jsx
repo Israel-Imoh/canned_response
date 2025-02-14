@@ -90,7 +90,7 @@ const Hero = () => {
           </h1>
         </div>
 
-        <div className="input-fields-wrapper" style={{marginTop: '-40px'}}>
+        <div className="input-fields-wrapper" >
           <div className="input-fields">
             <div className="searchbar-container">
               <div className="searchbar">

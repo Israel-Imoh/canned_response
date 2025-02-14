@@ -9,6 +9,7 @@
     color: #FFFFFF;
     font-weight: 700;
     font-size: 18px;
+    cursor: pointer;
 }
 .nav-links{
     display: flex;
@@ -22,6 +23,7 @@
     font-size: 14px;
     line-height: 21px;
     list-style: none;
+    cursor: pointer;
 }
 .link-item-1{
     display: flex;
@@ -35,6 +37,7 @@
     color: white;
     font-size: 15px;
     font-weight: 500;
+    cursor: pointer;
 }
 .link-item-2{
     display: flex;
@@ -48,6 +51,7 @@
     color: #0B0C0D;
     font-size: 15px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 img{
