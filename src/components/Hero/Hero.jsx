@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Hero.css";
 import { CiSearch } from "react-icons/ci";
 import { BiFilterAlt } from "react-icons/bi";
-import { AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import Copy_icon from "../../assets/copy_icon.png";
 import { search_dropdown, filter_dropdown } from "../../data/Data";
 
@@ -10,7 +10,7 @@ const Hero = () => {
   const [search, setSearch] = useState("");
   const [filterSearch, setFilterSearch] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [selectedFilters, setSelectedFilters] = useState(new Set());
   const [copiedText, setCopiedText] = useState(null);
   const filterRef = useRef(null);
 
@@ -36,7 +36,21 @@ const Hero = () => {
   }, []);
 
   const handleFilterSelect = (filterText) => {
-    setSelectedFilter(filterText);
+    setSelectedFilters(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(filterText)) {
+        newSet.delete(filterText);
+      } else {
+        newSet.add(filterText);
+      }
+      return newSet;
+    });
+    // Removed the setIsFilterOpen(false) to keep dropdown open
+  };
+
+  const clearFilters = (e) => {
+    e.stopPropagation();
+    setSelectedFilters(new Set());
   };
 
   const handleCopy = (text) => {
@@ -52,11 +66,13 @@ const Hero = () => {
           text => text?.toLowerCase().includes(search.toLowerCase())
         );
 
-    const matchesFilter = selectedFilter 
-      ? [item.text_1, item.text_2, item.status].some(
-          text => text?.toLowerCase().includes(selectedFilter.toLowerCase())
-        )
-      : true;
+    const matchesFilter = selectedFilters.size === 0
+      ? true
+      : [item.text_1, item.text_2, item.status].some(
+          text => Array.from(selectedFilters).some(filter => 
+            text?.toLowerCase().includes(filter.toLowerCase())
+          )
+        );
 
     return matchesSearch && matchesFilter;
   });
@@ -74,11 +90,11 @@ const Hero = () => {
           </h1>
         </div>
 
-        <div className="input-fields-wrapper">
+        <div className="input-fields-wrapper" style={{marginTop: '-40px'}}>
           <div className="input-fields">
             <div className="searchbar-container">
               <div className="searchbar">
-                <CiSearch style={{marginBottom: "16px"}} size={20} className="search-icon" />
+                <CiSearch style={{marginTop: "16px", marginBottom: "16px"}} size={20} className="search-icon" />
                 <input
                   onChange={(e) => setSearch(e.target.value)}
                   value={search}
@@ -95,6 +111,13 @@ const Hero = () => {
               >
                 <BiFilterAlt size={15} />
                 <p>Filter</p>
+                {selectedFilters.size > 0 && (
+                  <AiOutlineClose 
+                    size={15} 
+                    onClick={clearFilters}
+                    className="clear-filter-icon"
+                  />
+                )}
               </div>
 
               {isFilterOpen && (
@@ -121,7 +144,7 @@ const Hero = () => {
                           <h5>{header}</h5>
                           {filteredItems.map((item, i) => (
                             <div 
-                              className={`item-info ${selectedFilter === item.filter_text ? 'selected' : ''}`}
+                              className={`item-info ${selectedFilters.has(item.filter_text) ? 'selected' : ''}`}
                               key={i}
                               onClick={(e) => {
                                 e.stopPropagation();
