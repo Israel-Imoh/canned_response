@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="footer">
-      <div className="footer-container">
+      {/* <div className="footer-container">
         <div className="footer-top">
           <div className="footer-left">
             <h1>
@@ -68,6 +68,17 @@ const Footer = () => {
             <img src={LinkedIn_icon} alt="" />
             <img src={Twitter_icon} alt="" />
           </div>
+        </div>
+      </div> */}
+      <hr />
+      <div className="container">
+        <div className="footer-left">Made with ❤️ in Lagos</div>
+        <h3 className="nav-logo">Ruut Chat</h3>
+        <div className="right">
+          <img src={Mail_icon} alt="" />
+          <img src={Instagram_icon} alt="" />
+          <img src={LinkedIn_icon} alt="" />
+          <img src={Twitter_icon} alt="" />
         </div>
       </div>
     </div>

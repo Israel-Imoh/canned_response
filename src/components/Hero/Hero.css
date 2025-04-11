@@ -1,4 +1,4 @@
-.hero { 
+.hero {
   padding: 20px 50px;
   background: black;
   overflow-x: hidden;
@@ -58,7 +58,7 @@
   font-size: 12px;
   font-weight: 600;
   height: 20px;
-  background-color:#1e1f1f;
+  background-color: #1e1f1f;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -95,7 +95,7 @@
 }
 
 /* Search Dropdown */
-.search-dropdown-container{
+.search-dropdown-container {
   position: relative;
   z-index: 20;
   border-radius: 6px;
@@ -126,6 +126,14 @@
   font-size: 14px;
   font-weight: 400;
 }
+.clear-search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  cursor: pointer;
+}
 
 .search-dropdown {
   width: 100%;
@@ -148,10 +156,10 @@
   height: 100%;
 }
 
-.user-text{
+.user-text {
   font-size: 14px;
   font-weight: 400;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: left;
   line-height: 24px;
 }
@@ -167,7 +175,7 @@
   margin-bottom: 8px;
 }
 
-.search-subitems-text{
+.search-subitems-text {
   display: flex;
   font-weight: 400;
   font-size: 12.5px;
@@ -181,56 +189,56 @@
 }
 
 /* STATUS */
-.first-time-visitor{
-  background-color: #DBEAFE;
-  color: #3B82F6;
+.first-time-visitor {
+  background-color: #dbeafe;
+  color: #3b82f6;
 }
 
 .returning-visitor,
-.we-dont-support-that{
-  color: #22C55E;
-  background-color: #DCFCE7;
+.we-dont-support-that {
+  color: #22c55e;
+  background-color: #dcfce7;
 }
 
-.recording-disclaimer{
-  background-color: #FFEDD5;
-  color: #F97316;
+.recording-disclaimer {
+  background-color: #ffedd5;
+  color: #f97316;
 }
 
-.ask-for-more{
-  background-color: #FEF9C3;
-  color: #EAB308;
+.ask-for-more {
+  background-color: #fef9c3;
+  color: #eab308;
 }
 
-.transferring-the-chat{
-  background-color: #E0E7FF;
-  color: #6366F1;
+.transferring-the-chat {
+  background-color: #e0e7ff;
+  color: #6366f1;
 }
 
 .dont-know,
-.admin-fault{
-  background-color: #FAE8FF;
-  color: #D946EF;
+.admin-fault {
+  background-color: #fae8ff;
+  color: #d946ef;
 }
 
-.in-the-queue{
-  color: #EF4444;
-  background-color: #FEE2E2;
+.in-the-queue {
+  color: #ef4444;
+  background-color: #fee2e2;
 }
 
-.mid-session{
-  background-color: #F3F4F6;
-  color: #6B7280;
+.mid-session {
+  background-color: #f3f4f6;
+  color: #6b7280;
 }
 
-.icons{
+.icons {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
 
-.icons img{
+.icons img {
   width: 24px;
   height: 24px;
 }
@@ -302,7 +310,7 @@
   padding-bottom: 10px;
 }
 
-.items:last-child{
+.items:last-child {
   border: none;
 }
 
@@ -377,8 +385,6 @@
   right: 0;
   white-space: nowrap;
 }
-
-
 
 /* Add these styles to your Hero.css file */
 

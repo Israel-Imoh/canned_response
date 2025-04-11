@@ -36,7 +36,7 @@ const Hero = () => {
   }, []);
 
   const handleFilterSelect = (filterText) => {
-    setSelectedFilters(prev => {
+    setSelectedFilters((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(filterText)) {
         newSet.delete(filterText);
@@ -60,19 +60,21 @@ const Hero = () => {
   };
 
   const filteredSearchResults = search_dropdown.filter((item) => {
-    const matchesSearch = search.trim() === ""
-      ? true
-      : [item.text_1, item.text_2, item.status].some(
-          text => text?.toLowerCase().includes(search.toLowerCase())
-        );
+    const matchesSearch =
+      search.trim() === ""
+        ? true
+        : [item.text_1, item.text_2, item.status].some((text) =>
+            text?.toLowerCase().includes(search.toLowerCase())
+          );
 
-    const matchesFilter = selectedFilters.size === 0
-      ? true
-      : [item.text_1, item.text_2, item.status].some(
-          text => Array.from(selectedFilters).some(filter => 
-            text?.toLowerCase().includes(filter.toLowerCase())
-          )
-        );
+    const matchesFilter =
+      selectedFilters.size === 0
+        ? true
+        : [item.text_1, item.text_2, item.status].some((text) =>
+            Array.from(selectedFilters).some((filter) =>
+              text?.toLowerCase().includes(filter.toLowerCase())
+            )
+          );
 
     return matchesSearch && matchesFilter;
   });
@@ -90,30 +92,37 @@ const Hero = () => {
           </h1>
         </div>
 
-        <div className="input-fields-wrapper" >
+        <div className="input-fields-wrapper">
           <div className="input-fields">
             <div className="searchbar-container">
               <div className="searchbar">
-                <CiSearch style={{marginTop: "16px", marginBottom: "16px"}} size={20} className="search-icon" />
+                <CiSearch size={20} className="search-icon" />
                 <input
                   onChange={(e) => setSearch(e.target.value)}
                   value={search}
                   type="text"
                   placeholder='Search for "How can I help?"'
                 />
+                {search && (
+                  <AiOutlineClose
+                    size={18}
+                    className="clear-search-icon"
+                    onClick={() => setSearch("")}
+                  />
+                )}
               </div>
             </div>
 
             <div className="filter-container" ref={filterRef}>
-              <div 
+              <div
                 className="filter-bar"
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
               >
                 <BiFilterAlt size={15} />
                 <p>Filter</p>
                 {selectedFilters.size > 0 && (
-                  <AiOutlineClose 
-                    size={15} 
+                  <AiOutlineClose
+                    size={15}
                     onClick={clearFilters}
                     className="clear-filter-icon"
                   />
@@ -123,7 +132,11 @@ const Hero = () => {
               {isFilterOpen && (
                 <div className="filter-dropdown-container">
                   <div className="filter-searchbar">
-                    <CiSearch size={20} style={{marginTop: "2px", marginLeft: "12px"}} className="search-icon" />
+                    <CiSearch
+                      size={20}
+                      style={{ marginTop: "2px", marginLeft: "12px" }}
+                      className="search-icon"
+                    />
                     <input
                       onChange={(e) => setFilterSearch(e.target.value)}
                       value={filterSearch}
@@ -132,33 +145,41 @@ const Hero = () => {
                     />
                   </div>
                   <div className="filter-items">
-                    {Object.entries(groupedFilters).map(([header, items], index) => {
-                      const filteredItems = items.filter((item) =>
-                        filterSearch.trim() === ""
-                          ? true
-                          : item.filter_text.toLowerCase().includes(filterSearch.toLowerCase())
-                      );
-                      if (filteredItems.length === 0) return null;
-                      return (
-                        <div className="items" key={index}>
-                          <h5>{header}</h5>
-                          {filteredItems.map((item, i) => (
-                            <div 
-                              className={`item-info ${selectedFilters.has(item.filter_text) ? 'selected' : ''}`}
-                              key={i}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleFilterSelect(item.filter_text);
-                              }}
-                              style={{ cursor: 'pointer' }}
-                            >
-                              <p className="text">{item.filter_text}</p>
-                              <p className="n0">{item.filter_no}</p>
-                            </div>
-                          ))}
-                        </div>
-                      );
-                    })}
+                    {Object.entries(groupedFilters).map(
+                      ([header, items], index) => {
+                        const filteredItems = items.filter((item) =>
+                          filterSearch.trim() === ""
+                            ? true
+                            : item.filter_text
+                                .toLowerCase()
+                                .includes(filterSearch.toLowerCase())
+                        );
+                        if (filteredItems.length === 0) return null;
+                        return (
+                          <div className="items" key={index}>
+                            <h5>{header}</h5>
+                            {filteredItems.map((item, i) => (
+                              <div
+                                className={`item-info ${
+                                  selectedFilters.has(item.filter_text)
+                                    ? "selected"
+                                    : ""
+                                }`}
+                                key={i}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleFilterSelect(item.filter_text);
+                                }}
+                                style={{ cursor: "pointer" }}
+                              >
+                                <p className="text">{item.filter_text}</p>
+                                <p className="n0">{item.filter_no}</p>
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      }
+                    )}
                   </div>
                 </div>
               )}
@@ -173,9 +194,22 @@ const Hero = () => {
                     <p className="user-text">{item.text_1}</p>
                   </div>
                   <div className="search-subitems">
-                    <p className={`search-subitems-text ${item.status}`}>{item.text_2}</p>
-                    <div className="icons" onClick={() => handleCopy(item.text_1)}>
-                      {copiedText === item.text_1 ? <AiOutlineCheck size={20} color="gray" /> : <img src={Copy_icon} alt="Copy" style={{ cursor: "pointer" }} />}
+                    <p className={`search-subitems-text ${item.status}`}>
+                      {item.text_2}
+                    </p>
+                    <div
+                      className="icons"
+                      onClick={() => handleCopy(item.text_1)}
+                    >
+                      {copiedText === item.text_1 ? (
+                        <AiOutlineCheck size={20} color="gray" />
+                      ) : (
+                        <img
+                          src={Copy_icon}
+                          alt="Copy"
+                          style={{ cursor: "pointer" }}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
