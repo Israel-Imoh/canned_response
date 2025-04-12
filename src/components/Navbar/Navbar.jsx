@@ -15,9 +15,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-right">
         <ul className="nav-links">
-          {/* <li className="link">Product</li>
-          <li className="link">Resource</li>
-          <li className="link">Pricing</li> */}
+          {/* f */}
           <li className="link-item-1">
             Book a demo{" "}
             <span>

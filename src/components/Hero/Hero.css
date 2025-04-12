@@ -418,3 +418,285 @@
 .filter-bar:hover .clear-filter-icon {
   opacity: 1;
 }
+
+/* Base styles remain unchanged - only adding media queries for responsiveness */
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 1200px) {
+  .hero {
+    padding: 15px 30px;
+  }
+
+  .top-header h1 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .header > h5 {
+    width: 20%;
+    font-size: 11px;
+  }
+
+  .search-items,
+  .search-subitems {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .hero {
+    padding: 12px 25px;
+  }
+
+  .top-header h1 {
+    font-size: 32px;
+    line-height: 40px;
+    margin-top: 30px;
+  }
+
+  .header > h5 {
+    width: 25%;
+    font-size: 10px;
+    height: 22px;
+  }
+
+  .searchbar input {
+    width: 500px;
+  }
+
+  .search-items,
+  .search-subitems {
+    padding: 10px 14px;
+  }
+
+  .user-text {
+    font-size: 13px;
+    line-height: 22px;
+  }
+
+  .search-subitems-text {
+    font-size: 11.5px;
+    padding: 8px;
+    height: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 10px 20px;
+  }
+
+  .hero-top {
+    height: 40vh;
+    margin: -10px -20px;
+  }
+
+  .top-header h1 {
+    font-size: 28px;
+    line-height: 36px;
+    margin-top: 25px;
+  }
+
+  .header > h5 {
+    width: 30%;
+    font-size: 9px;
+    height: 20px;
+    margin-top: 40px;
+  }
+
+  /* Keep the input fields in row layout */
+  .input-fields {
+    gap: 8px;
+  }
+
+  .searchbar input {
+    width: 300px;
+    height: 34px;
+    font-size: 13px;
+  }
+
+  .filter-bar {
+    width: 100px;
+    height: 34px;
+    font-size: 13px;
+  }
+
+  .filter-dropdown-container {
+    width: 240px;
+    right: -80px; /* Position adjustment to keep visible on page */
+    left: auto;
+  }
+
+  .filter-searchbar input {
+    width: 210px;
+    height: 34px;
+  }
+
+  .icons img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .hero {
+    padding: 8px 15px;
+  }
+
+  .hero-top {
+    height: 35vh;
+    margin: -8px -15px;
+  }
+
+  .top-header h1 {
+    font-size: 24px;
+    line-height: 32px;
+    margin-top: 20px;
+  }
+
+  .header {
+    margin-top: 30px;
+  }
+
+  .header > h5 {
+    width: 40%;
+    font-size: 8px;
+    height: 18px;
+  }
+
+  .searchbar input {
+    width: 220px;
+    height: 32px;
+    font-size: 12px;
+    padding-left: 30px;
+  }
+
+  .search-icon {
+    font-size: 16px;
+    left: 8px;
+  }
+
+  .filter-bar {
+    width: 90px;
+    height: 32px;
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .filter-dropdown-container {
+    width: 220px;
+    padding: 10px;
+    right: -60px;
+  }
+
+  .filter-searchbar input {
+    width: 190px;
+    height: 32px;
+  }
+
+  .items h5 {
+    font-size: 12px;
+    margin-left: -120px;
+  }
+
+  .text {
+    font-size: 12px;
+  }
+
+  .n0 {
+    width: 32px;
+    height: 22px;
+    font-size: 11px;
+  }
+
+  .search-items,
+  .search-subitems {
+    padding: 8px 12px;
+  }
+
+  .user-text {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .search-subitems-text {
+    font-size: 10.5px;
+    padding: 6px;
+    height: 18px;
+  }
+
+  .icons img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .dropdowns-container {
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-top {
+    height: 30vh;
+  }
+
+  .top-header h1 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .header > h5 {
+    width: 50%;
+    font-size: 7px;
+    height: 16px;
+  }
+
+  .searchbar input {
+    width: 180px;
+    height: 30px;
+  }
+
+  .filter-bar {
+    width: 80px;
+    height: 30px;
+    font-size: 11px;
+  }
+
+  .filter-dropdown-container {
+    width: 200px;
+    right: -40px;
+    white-space: nowrap;
+  }
+
+  .filter-searchbar input {
+    width: 170px;
+    height: 30px;
+  }
+
+  .items h5 {
+    margin-left: -110px;
+    font-size: 11px;
+  }
+}
+
+/* Ensure filter dropdown positions correctly */
+@media screen and (max-width: 400px) {
+  .filter-dropdown-container {
+    right: -20px;
+    width: 180px;
+  }
+
+  .filter-searchbar input {
+    width: 150px;
+  }
+
+  .items h5 {
+    margin-left: -90px;
+  }
+}
+
+/* Small enhancement for box shadow - keeping all original styles */
+.filter-dropdown-container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1010;
+}

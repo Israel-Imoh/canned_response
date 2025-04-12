@@ -7,7 +7,7 @@ const CannedResponses = () => {
   return (
     <div>
       <Hero />
-      <Footer />
+      {/* <Footer /> */}
       {/* <WhatsappAutomation /> */}
     </div>
   );

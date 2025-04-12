@@ -36,7 +36,7 @@
   justify-content: center;
   gap: 7px;
   background-color: #282b2b;
-  border-radius: 12px;
+  border-radius: 10px;
   width: 148px;
   height: 40px;
   color: white;
@@ -50,7 +50,7 @@
   justify-content: center;
   gap: 4px;
   background-color: white;
-  border-radius: 12px;
+  border-radius: 10px;
   width: 148px;
   height: 40px;
   color: #0b0c0d;
@@ -62,4 +62,33 @@
 img {
   width: 16px;
   height: 16px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 20px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 6px;
+  }
+  .link-item-1,
+  .link-item-2 {
+    width: 111px;
+    height: 36px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+}
+@media (max-width: 380px) {
+  .navbar {
+    padding: 15px;
+  }
+  .link-item-1,
+  .link-item-2 {
+    width: 101px;
+    height: 29px;
+  }
 }
