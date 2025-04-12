@@ -603,7 +603,7 @@ export const filter_dropdown = [
   },
   {
     filter_header: "PERMISSIONS",
-    filter_text: "Ask for more info",
+    filter_text: "Ask for more information",
     filter_no: 12,
   },
   {

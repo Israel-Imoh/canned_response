@@ -523,7 +523,7 @@
 
   .filter-dropdown-container {
     width: 240px;
-    right: -80px; /* Position adjustment to keep visible on page */
+    right: -60px; /* Position adjustment to keep visible on page */
     left: auto;
   }
 

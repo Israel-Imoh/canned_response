@@ -15,6 +15,9 @@ const Hero = () => {
   const filterRef = useRef(null);
   const searchDropdownRef = useRef(null);
 
+  const placeholderText =
+    window.innerWidth <= 500 ? "Search..." : 'Search for "How can I help?"';
+
   const groupedFilters = filter_dropdown.reduce((acc, item) => {
     if (!acc[item.filter_header]) {
       acc[item.filter_header] = [];
@@ -117,8 +120,9 @@ const Hero = () => {
                   onChange={(e) => setSearch(e.target.value)}
                   value={search}
                   type="text"
-                  placeholder='Search for "How can I help?"'
+                  placeholder={placeholderText}
                 />
+
                 {search && (
                   <AiOutlineClose
                     size={18}
@@ -172,12 +176,8 @@ const Hero = () => {
                         );
                         if (filteredItems.length === 0) return null;
                         return (
-                          <div
-                            className="items"
-                            key={index}
-                            style={{ marginLeft: "-7px" }}
-                          >
-                            <h5>{header}</h5>
+                          <div className="items" key={index}>
+                            <h5 style={{ marginRight: "-25px" }}>{header}</h5>
                             {filteredItems.map((item, i) => (
                               <div
                                 className={`item-info ${
@@ -190,10 +190,18 @@ const Hero = () => {
                                   e.stopPropagation();
                                   handleFilterSelect(item.filter_text);
                                 }}
-                                style={{ cursor: "pointer" }}
+                                style={{
+                                  cursor: "pointer",
+                                  marginLeft: "-16px",
+                                }}
                               >
                                 <p className="text">{item.filter_text}</p>
-                                <p className="n0">{item.filter_no}</p>
+                                <p
+                                  className="n0"
+                                  style={{ marginRight: "-25px" }}
+                                >
+                                  {item.filter_no}
+                                </p>
                               </div>
                             ))}
                           </div>
