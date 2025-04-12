@@ -146,5 +146,6 @@ hr {
   hr {
     border-top: 1px solid transparent;
     border: none;
+    padding-top: -60px;
   }
 }

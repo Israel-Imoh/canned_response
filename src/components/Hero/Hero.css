@@ -461,7 +461,7 @@
   }
 
   .searchbar input {
-    width: 500px;
+    width: 600px;
   }
 
   .search-items,
@@ -510,7 +510,7 @@
   }
 
   .searchbar input {
-    width: 300px;
+    width: 500px;
     height: 34px;
     font-size: 13px;
   }
@@ -634,6 +634,21 @@
     margin-top: 30px;
   }
 }
+@media (max-width: 670px) {
+  .searchbar input {
+    width: 410px;
+  }
+}
+@media (max-width: 580px) {
+  .searchbar input {
+    width: 370px;
+  }
+}
+@media (max-width: 550px) {
+  .searchbar input {
+    width: 320px;
+  }
+}
 
 @media screen and (max-width: 480px) {
   .hero-top {
@@ -652,7 +667,7 @@
   }
 
   .searchbar input {
-    width: 180px;
+    width: 280px;
     height: 30px;
   }
 
@@ -678,6 +693,11 @@
     font-size: 11px;
   }
 }
+@media (max-width: 448px) {
+  .searchbar input {
+    width: 240px;
+  }
+}
 
 /* Ensure filter dropdown positions correctly */
 @media screen and (max-width: 400px) {
@@ -699,4 +719,14 @@
 .filter-dropdown-container {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1010;
+}
+@media (max-width: 405px) {
+  .searchbar input {
+    width: 200px;
+  }
+}
+@media (max-width: 365px) {
+  .searchbar input {
+    width: 180px;
+  }
 }
