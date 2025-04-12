@@ -175,7 +175,7 @@ const Hero = () => {
                           <div
                             className="items"
                             key={index}
-                            style={{ marginLeft: "-10px" }}
+                            style={{ marginLeft: "-7px" }}
                           >
                             <h5>{header}</h5>
                             {filteredItems.map((item, i) => (

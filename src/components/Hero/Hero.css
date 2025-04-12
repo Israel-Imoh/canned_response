@@ -91,7 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 /* Search Dropdown */
@@ -506,7 +506,7 @@
 
   /* Keep the input fields in row layout */
   .input-fields {
-    gap: 8px;
+    gap: 20px;
   }
 
   .searchbar input {
