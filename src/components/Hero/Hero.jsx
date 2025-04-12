@@ -13,6 +13,7 @@ const Hero = () => {
   const [selectedFilters, setSelectedFilters] = useState(new Set());
   const [copiedText, setCopiedText] = useState(null);
   const filterRef = useRef(null);
+  const searchDropdownRef = useRef(null);
 
   const groupedFilters = filter_dropdown.reduce((acc, item) => {
     if (!acc[item.filter_header]) {
@@ -29,9 +30,24 @@ const Hero = () => {
       }
     };
 
+    // Handle window resizing
+    const handleResize = () => {
+      // This is just to ensure any calculation dependent on window size happens
+      if (searchDropdownRef.current) {
+        const width = window.innerWidth;
+        // Any responsive adjustments needed could be handled here
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("resize", handleResize);
+
+    // Initial call to handle size
+    handleResize();
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -45,7 +61,7 @@ const Hero = () => {
       }
       return newSet;
     });
-    // Removed the setIsFilterOpen(false) to keep dropdown open
+    // Kept dropdown open as per original code
   };
 
   const clearFilters = (e) => {
@@ -156,7 +172,11 @@ const Hero = () => {
                         );
                         if (filteredItems.length === 0) return null;
                         return (
-                          <div className="items" key={index}>
+                          <div
+                            className="items"
+                            key={index}
+                            style={{ marginLeft: "-10px" }}
+                          >
                             <h5>{header}</h5>
                             {filteredItems.map((item, i) => (
                               <div
@@ -186,7 +206,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="dropdowns-container">
+          <div className="dropdowns-container" ref={searchDropdownRef}>
             <div className="search-dropdown-container">
               {filteredSearchResults.map((item, i) => (
                 <div className="search-dropdown" key={i}>
