@@ -506,7 +506,7 @@
 
   /* Keep the input fields in row layout */
   .input-fields {
-    gap: 20px;
+    gap: 18px;
   }
 
   .searchbar input {
