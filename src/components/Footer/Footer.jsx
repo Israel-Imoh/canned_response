@@ -75,10 +75,18 @@ const Footer = () => {
         <div className="footer-left">Made with ❤️ in Lagos</div>
         <h3 className="nav-logo">Ruut Chat</h3>
         <div className="right">
-          <img src={Mail_icon} alt="" />
-          <img src={Instagram_icon} alt="" />
-          <img src={LinkedIn_icon} alt="" />
-          <img src={Twitter_icon} alt="" />
+          <a href="mailto:admin@ruut.chat">
+            <img src={Mail_icon} alt="" />
+          </a>
+          <a href="https://www.instagram.com/ruutchat/" target="_blank">
+            <img src={Instagram_icon} alt="" />
+          </a>{" "}
+          <a href="https://www.linkedin.com/company/ruut-csm/" target="_blank">
+            <img src={LinkedIn_icon} alt="" />
+          </a>
+          <a href="https://x.com/ruutchat" target="_blank">
+            <img src={Twitter_icon} alt="" />
+          </a>{" "}
         </div>
       </div>
     </div>
